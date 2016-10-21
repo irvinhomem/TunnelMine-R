@@ -5,6 +5,12 @@ dirname(getwd())
 
 concat_str = paste("string 1", "string 2", sep="/")
 
+http_ov_dns_files <- list()
+ftp_ov_dns_files <- list()
+http_s_ov_dns_files <- list()
+pop3_ov_dns_files <- list()
+
+
 # paste(dirname(getwd()), "Datasets/JSON-4-Classes", sep="/")
 dataset_path = paste(dirname(getwd()), "Datasets/JSON-4-Classes", sep="/")
 
@@ -20,43 +26,47 @@ ftp_ov_dns_files <- list.files(path=ftp_ov_dns_path, pattern="*.json", full.name
 http_s_ov_dns_files <- list.files(path=http_s_ov_dns_path, pattern="*.json", full.names=TRUE, recursive=TRUE, include.dirs = TRUE )
 pop3_ov_dns_files <- list.files(path=pop3_ov_dns_path, pattern="*.json", full.names=TRUE, recursive=TRUE, include.dirs = TRUE )
 
-# Test collection of JSON data from a single file
-json_data_single <- fromJSON(file=http_ov_dns_files[1])
 
-# Convert json to data frame (may fail due to differing lengths of rows)
-#json_single_data_frame <- as.data.frame(json_data_single)
+test_loaded_json_files <- function(){
+  # Test collection of JSON data from a single file
+  json_data_single <- fromJSON(file=http_ov_dns_files[1])
+  
+  # Convert json to data frame (may fail due to differing lengths of rows)
+  #json_single_data_frame <- as.data.frame(json_data_single)
+  
+  typeof(json_data_single)
+  
+  # Get values if a particular parameter from the json
+  json_data_single[[1]]
+  json_data_single$filename
+  typeof(json_data_single$filename)
+  
+  json_data_single[[2]]
+  json_data_single$`pcap-Md5-hash`
+  
+  json_data_single[[4]]
+  json_data_single$protocol
+  
+  # Get list-item containing the 1st json property name -> DNS-Req-Lens
+  json_data_single[[3]][[1]]$feature_name
+  json_data_single$props[[1]]$feature_name
+  
+  # Get list-item containing the 2nd json property name -> IP-Req-Lens
+  json_data_single[[3]][[2]]$feature_name
+  json_data_single$props[[2]]$feature_name
+  
+  # Get list-item containing the 4th json property name -> DNS-Req-Qnames-Enc-Comp-Entropy
+  json_data_single[[3]][[4]]$feature_name
+  json_data_single$props[[4]]$feature_name
+  
+  # Get average of entropy values for single pcap_json_object
+  entropy_avg = mean(json_data_single$props[[4]]$values)
+  
+  # Get average IP-Req-Len for single pcap_json_object
+  ip_len_avg =  mean(json_data_single$props[[2]]$values)
+}
 
-typeof(json_data_single)
-
-# Get values if a particular parameter from the json
-json_data_single[[1]]
-json_data_single$filename
-typeof(json_data_single$filename)
-
-json_data_single[[2]]
-json_data_single$`pcap-Md5-hash`
-
-json_data_single[[4]]
-json_data_single$protocol
-
-# Get list-item containing the 1st json property name -> DNS-Req-Lens
-json_data_single[[3]][[1]]$feature_name
-json_data_single$props[[1]]$feature_name
-
-# Get list-item containing the 2nd json property name -> IP-Req-Lens
-json_data_single[[3]][[2]]$feature_name
-json_data_single$props[[2]]$feature_name
-
-# Get list-item containing the 4th json property name -> DNS-Req-Qnames-Enc-Comp-Entropy
-json_data_single[[3]][[4]]$feature_name
-json_data_single$props[[4]]$feature_name
-
-# Get average of entropy values for single pcap_json_object
-entropy_avg = mean(json_data_single$props[[4]]$values)
-
-# Get average IP-Req-Len for single pcap_json_object
-ip_len_avg =  mean(json_data_single$props[[2]]$values)
-
+#load_features_from_json_files <- function(){
 f_name = vector()
 proto_name = vector()
 avg_entropy= vector()
@@ -127,4 +137,6 @@ print(http_s_ov_dns_pcap_features_df)
 print(pop3_ov_dns_pcap_features_df)
 
 print(json_features_all_pcaps_df)
-#str(pcap_features_df)
+  
+#return (json_features_all_pcaps_df)
+#}
