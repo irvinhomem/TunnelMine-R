@@ -5,9 +5,9 @@ library("caret")
 library("rpart")
 
 # Choosing the number of features to use in the different classifiers
-#frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len + avg_dns_req_len)  # With 3 features
-frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len)                   # With 2 features
-#frmla = as.formula(proto_label ~ avg_entropy)                   # With 1 feature
+#frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len + avg_dns_req_len)   # With 3 features
+frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len)                      # With 2 features
+#frmla = as.formula(proto_label ~ avg_entropy)                                      # With 1 feature
 
 # Setting up pre-defined (fixed) folds/resamples --> in this case where k=10 folds (for testing) and the amount of data used for training (p = 0.9) i.e 90%
 #myFolds <- createDataPartition(json_features_all_pcaps_df$avg_entropy, times = 10, p = 0.9, list = FALSE)    # The class probability and distribution got skewed here
