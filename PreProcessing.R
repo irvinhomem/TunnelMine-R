@@ -9,7 +9,7 @@ library("rpart")
 #frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len)                       # With 2 features
 frmla = as.formula(proto_label ~ avg_entropy)                                        # With 1 feature
 
-# Setting up pre-defined (fixed) folds/resamples --> in this case where k=10 folds (for testing) and the amount of data used for training (p = 0.9) i.e 90%
+# Setting up PRE-DEFINED (FIXED) folds/resamples --> in this case where k=10 folds (for testing) and the amount of data used for training (p = 0.9) i.e 90%
 #myFolds <- createDataPartition(json_features_all_pcaps_df$avg_entropy, times = 10, p = 0.9, list = TRUE)    # The class probability and distribution got skewed here
 myFolds <- createDataPartition(json_features_all_pcaps_df$proto_label, times = 10, p = 0.9, list = TRUE)   # The class probability distributions in the folds were better here
 #myFolds
@@ -20,8 +20,9 @@ head(myFolds)
 #train_ctrl <- trainControl(method = "cv", number = 10, p=0.9, savePredictions = "final", returnResamp = "final", returnData = TRUE) # classProbs = TRUE # sampling = "none"
 
 # Using predefined folds/resamples and Setting the parameters for the cross-validation / evaluation of the training model
-# Using "k-fold Cross-Validation" where the k-folds are set up previously and *FIXED*
+# Using "k-fold Cross-Validation" where the k-folds are SET UP PREVIOUSLY and *FIXED*
 train_ctrl <- trainControl(method = "cv", index = myFolds, savePredictions = "final", returnResamp = "final", returnData = TRUE) # classProbs = TRUE # sampling = "none"
 
 # Using Leave-One-Out-Cross-Validation (LOOCV)
 #train_ctrl <- trainControl(method = "loocv", index = myFolds, savePredictions = "final", returnResamp = "final", returnData = TRUE)
+
