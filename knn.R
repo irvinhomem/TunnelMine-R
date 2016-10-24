@@ -20,11 +20,13 @@ knnFit <- train(frmla, data=json_features_all_pcaps_df, method = "knn", trContro
 
 
 plot(knnFit)
+
+knnFit$pred[order(knnFit$pred$Resample, knnFit$pred$rowIndex),]
 knnFit
 knnFit$finalModel
 knnFit$results
 knnFit$bestTune
-knnFit$pred[order(knnFit$pred$Resample, knnFit$pred$rowIndex),]
+
 confusionMatrix(knnFit)
 
 
