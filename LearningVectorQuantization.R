@@ -17,3 +17,6 @@ lvqModel$results
 lvqModel$bestTune
 
 confusionMatrix(lvqModel)
+
+library("ggplot2")
+ggplot(lvqModel)
