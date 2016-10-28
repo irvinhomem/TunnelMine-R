@@ -7,8 +7,11 @@ library(caret)
 
 #RF_model <- train(frmla, data=json_features_all_pcaps_df, method = "rf", trControl=train_ctrl, preProcess = c("center", "scale"))
 
+# Most realistic
 RF_model <- train(frmla, data=json_features_all_pcaps_df, method = "rf", trControl=train_ctrl)
 
+# NB: When  tuneLength or tuneGrid have a "mtry" value greater than the number of features/columns/predictors available, Caret
+# creates "dummy variables" as extra predictors/features/columns to fill up the space (which may create weird results)
 # Best so far: Nice looking graph :-)
 RF_model <- train(frmla, data=json_features_all_pcaps_df, method = "rf", trControl=train_ctrl, tuneLength = 15)
 
