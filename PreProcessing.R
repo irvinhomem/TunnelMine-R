@@ -9,7 +9,7 @@ frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len + avg_dns_req_len)
 #frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len)                       # With 2 features
 #frmla = as.formula(proto_label ~ avg_entropy)                                        # With 1 feature
 #frmla = as.formula(proto_label  ~ .)                                                 # Randomly picked features ?? (For Random Forests) (Perhaps avoid this because it picks the filename also)
-frmla = as.formula(proto_label ~ . - filename)                                      # Use all features except proto_label and filename (For Random Forests)
+frmla = as.formula(proto_label ~ . - filename)                          # Use all features except proto_label and filename (For Random Forests)
 
 frmla
 
@@ -26,6 +26,7 @@ head(myFolds)
 # Using predefined folds/resamples and Setting the parameters for the cross-validation / evaluation of the training model
 # Using "k-fold Cross-Validation" where the k-folds are SET UP PREVIOUSLY and *FIXED*
 train_ctrl <- trainControl(method = "cv", index = myFolds, savePredictions = "final", returnResamp = "final", returnData = TRUE) # classProbs = TRUE # sampling = "none"
+#NB: Setting classProbs = TRUE causes errors for some reason
 
 # Using Leave-One-Out-Cross-Validation (LOOCV)
 #train_ctrl <- trainControl(method = "loocv", index = myFolds, savePredictions = "final", returnResamp = "final", returnData = TRUE)
