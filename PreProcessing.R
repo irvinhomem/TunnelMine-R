@@ -8,7 +8,10 @@ library("rpart")
 frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len + avg_dns_req_len)     # With 3 features
 #frmla = as.formula(proto_label ~ avg_entropy + avg_ip_req_len)                       # With 2 features
 #frmla = as.formula(proto_label ~ avg_entropy)                                        # With 1 feature
-#frmla = as.formula(proto_label ~ .)                                                  # Randomly picked features ?? (For Random Forests)
+#frmla = as.formula(proto_label  ~ .)                                                 # Randomly picked features ?? (For Random Forests) (Perhaps avoid this because it picks the filename also)
+frmla = as.formula(proto_label ~ . - filename)                                      # Use all features except proto_label and filename (For Random Forests)
+
+frmla
 
 # Setting up PRE-DEFINED (FIXED) folds/resamples --> in this case where k=10 folds (for testing) and the amount of data used for training (p = 0.9) i.e 90%
 #myFolds <- createDataPartition(json_features_all_pcaps_df$avg_entropy, times = 10, p = 0.9, list = TRUE)    # The class probability and distribution got skewed here
