@@ -16,7 +16,7 @@ lvqModel$finalModel
 lvqModel$results
 lvqModel$bestTune
 
-confusionMatrix(lvqModel)
+caret::confusionMatrix(lvqModel)
 
 library("ggplot2")
 ggplot(lvqModel)
