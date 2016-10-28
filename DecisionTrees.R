@@ -48,18 +48,18 @@ library(rpart.plot)
 fancyRpartPlot(tree_model$finalModel)
 rattle()
 
-library("ggplot2")
-library(ggdendro)
-ggplot(tree_model)
+#library("ggplot2")
+#library(ggdendro)
+#ggplot(tree_model)
 
-d_data <- dendro_data(tree_model$finalModel)
-ggdendrogram(d_data)
+#d_data <- dendro_data(tree_model$finalModel)
+#ggdendrogram(d_data)
 
-ggplot() + 
-  geom_segment(data = d_data$segments, 
-               aes(x = x, y = y, xend = xend, yend = yend)) + 
-  geom_text(data = d_data$labels, 
-            aes(x = x, y = y, label = label), size = 3, vjust = 0) +
-  geom_text(data = d_data$leaf_labels, 
-            aes(x = x, y = y, label = label), size = 3, vjust = 1) +
-  theme_dendro()
+#ggplot() + 
+#  geom_segment(data = d_data$segments, 
+#               aes(x = x, y = y, xend = xend, yend = yend)) + 
+#  geom_text(data = d_data$labels, 
+#            aes(x = x, y = y, label = label), size = 3, vjust = 0) +
+#  geom_text(data = d_data$leaf_labels, 
+#            aes(x = x, y = y, label = label), size = 3, vjust = 1) +
+#  theme_dendro()
