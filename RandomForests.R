@@ -53,6 +53,6 @@ RF_model$finalModel
 RF_model$results
 RF_model$bestTune
 
-confusionMatrix(RF_model)
+caret::confusionMatrix(RF_model)
 
 
