@@ -39,8 +39,8 @@ tree_model$method
 
 # Confusion Matrix
 print("Confusion Matrices for training model")
-confusionMatrix(tree_model)
-confusionMatrix(data=tree_model$pred$pred, reference = tree_model$pred$obs)
+caret::confusionMatrix(tree_model)
+caret::confusionMatrix(data=tree_model$pred$pred, reference = tree_model$pred$obs)
 
 # Fancy Plot from "rattle" package
 library("rattle")
