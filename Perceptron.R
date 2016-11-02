@@ -19,3 +19,4 @@ perceptron.model$results
 perceptron.model$bestTune
 
 caret::confusionMatrix(perceptron.model)
+caret::confusionMatrix(data=perceptron.model$pred$pred, reference = perceptron.model$pred$obs)
