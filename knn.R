@@ -13,7 +13,7 @@ library(caret)
 # 1-20 NN
 #knnFit <- train(frmla, data=json_features_all_pcaps_df, method = "knn", trControl=train_ctrl, preProcess = c("center", "scale"), tuneGrid = expand.grid(.k=1:20))
 # only 1-NN
-#knnFit <- train(frmla, data=json_features_all_pcaps_df, method = "knn", trControl=train_ctrl, preProcess = c("center", "scale"), tuneGrid = expand.grid(.k=1)) #1-NN
+knnFit <- train(frmla, data=json_features_all_pcaps_df, method = "knn", trControl=train_ctrl, preProcess = c("center", "scale"), tuneGrid = expand.grid(.k=5)) #1-NN
 # only 1-7-NN
 #knnFit <- train(frmla, data=json_features_all_pcaps_df, method = "knn", trControl=train_ctrl, preProcess = c("center", "scale"), tuneGrid = expand.grid(.k=1:7))
 # only Odd from 1-13-NN
@@ -28,6 +28,9 @@ knnFit$finalModel
 knnFit$results
 knnFit$bestTune
 
+posPredValue(knnFit$pred$pred, knnFit$pred$Resample)
+
 caret::confusionMatrix(knnFit)
+caret::confusionMatrix(data=knnFit$pred$pred, reference = knnFit$pred$obs)
 
 
