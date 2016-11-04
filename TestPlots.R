@@ -31,9 +31,17 @@ legend(x="bottomleft", legend = levels(proto_class_lbl), col = seq_along(levels(
 #legend(x="bottomleft", legend = levels(proto_class_lbl), pch=c(2,2))
 #legend(x="topright", legend = levels(proto_class_lbl), pch=1)
 
-plot(x = dns_req_lens, y = avg_entropy_vals, col=proto_class_lbl,
+plot(x = dns_req_lens, y = avg_entropy_vals, col=proto_class_lbl, pch = 20,
      xlab = "DNS Req Length", ylab = "Avg. Entropy")
+legend(x="topleft", legend = levels(proto_class_lbl), 
+       col = seq_along(levels(proto_class_lbl)), 
+       pch=19, cex=0.7,
+       box.col = "darkgreen"
+       ) # pch = 19 looks the same as 20, just slightly bigger
 abline(lm(avg_dns_req_lens ~ avg_entropy_vals), col = "cyan")
+#abline(lm(json_features_all_pcaps_df$avg_dns_req_len ~ json_features_all_pcaps_df$avg_entropy, data = json_features_all_pcaps_df), col = "cyan")
+#reg_line <- lm(avg_dns_req_lens ~ avg_entropy_vals, data = json_features_all_pcaps_df)
+#abline(reg_line, col = "cyan")
 
 # Using ggplot2
 # Plotting Entropy with bins (default binwidth = 30 ??)
